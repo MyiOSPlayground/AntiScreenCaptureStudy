@@ -16,7 +16,7 @@ class CVPixelBufferSupport: NSObject {
         
         let width = image.width
         let height = image.height
-        let type: OSType = kCVPixelFormatType_32ARGB
+//        let type: OSType = kCVPixelFormatType_32ARGB
         
         var pixelBuffer: CVPixelBuffer!
         let attrs = [kCVPixelBufferCGImageCompatibilityKey: kCFBooleanTrue,
@@ -24,7 +24,7 @@ class CVPixelBufferSupport: NSObject {
         let status = CVPixelBufferCreate(kCFAllocatorDefault,
                                          width,
                                          height,
-                                         type,
+                                         kCVPixelFormatType_32BGRA,
                                          attrs as CFDictionary,
                                          &pixelBuffer)
         if status != kCVReturnSuccess {
@@ -50,7 +50,13 @@ class CVPixelBufferSupport: NSObject {
 //        guard let context = CGContext.init(data: nil, width: Int(size.width), height: Int(size.height), bitsPerComponent: Int(bitsPerComponent), bytesPerRow: Int(bytesPerRow), space: colorSpace, bitmapInfo: UInt32(bitmapInfo.rawValue)) else {
             // cannot create context - handle error
 //        }
-        let context = CGContext.init(data: &pixelBuffer, width: width, height: height, bitsPerComponent: 8, bytesPerRow: CVPixelBufferGetBytesPerRow(pixelBuffer), space: colorSpace, bitmapInfo: bitmapInfo.rawValue)
+        let context = CGContext.init(data: &pixelBuffer,
+                                     width: width,
+                                     height: height,
+                                     bitsPerComponent: 8,
+                                     bytesPerRow: CVPixelBufferGetBytesPerRow(pixelBuffer),
+                                     space: colorSpace,
+                                     bitmapInfo: bitmapInfo.rawValue)
         
 //        print("context: \(context)")
 //        CGContextDrawImage(context, CGRect(x: 0, y: 0, width: width, height: height), image)

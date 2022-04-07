@@ -40,8 +40,8 @@ class ViewController: UIViewController {
 //        testView.setNeedsDisplay()
         
         // test
-//        myLayer.flush()
-        myLayer.backgroundColor = UIColor.brown.cgColor
+        myLayer.flush()
+//        myLayer.backgroundColor = UIColor.red.cgColor
         let test3: CMSampleBuffer = UIImage(named: "tomato")!.cmSampleBuffer
 //        myLayer.enqueue(test3)
         print("test3: \(test3)")
