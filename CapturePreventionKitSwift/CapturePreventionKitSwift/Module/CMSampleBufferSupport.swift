@@ -34,25 +34,7 @@ class CMSampleBufferSupport: NSObject {
             print("err")
         }
         
-        
-        
         return buffer
     }
-//    OSStatus __CMSampleBufferCreateReadyWithImageBuffer(CVImageBufferRef _Nonnull imageBuffer, CMSampleBufferRef _Nullable * _Nonnull sampleBufferOut) {
-//        CMVideoFormatDescriptionRef formatDescription;
-//        OSStatus status = CMVideoFormatDescriptionCreateForImageBuffer(kCFAllocatorDefault, imageBuffer, &formatDescription);
-//        if (status != 0) {
-//            return status;
-//        }
-//
-//        CMSampleTimingInfo timingInfo;
-//        timingInfo.duration = kCMTimeZero;
-//        timingInfo.presentationTimeStamp = kCMTimeZero;
-//        timingInfo.decodeTimeStamp = kCMTimeInvalid;
-//
-//        status = CMSampleBufferCreateReadyWithImageBuffer(kCFAllocatorDefault, imageBuffer, formatDescription, &timingInfo, sampleBufferOut);
-//        CFRelease(formatDescription);
-//        return status;
-//    }
 
 }

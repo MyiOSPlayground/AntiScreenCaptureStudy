@@ -13,14 +13,10 @@ class CVPixelBufferSupport: NSObject {
     
     func pixelBufferCreate(image: CGImage) -> CVPixelBuffer {
         
-        let testImg = UIImage(named: "tomato")!.cgImage!
-        // Create a Pixel Buffer
-        
-        let width = testImg.width
-        let height = testImg.height
+        let width = image.width
+        let height = image.height
         
         var pixelBuffer: CVPixelBuffer!
-//        var pixelBuffer: CVPixelBuffer? = nil
         let options: [CFString: Any] = [
             kCVPixelBufferCGImageCompatibilityKey: true,
             kCVPixelBufferCGBitmapContextCompatibilityKey: true,
@@ -33,32 +29,15 @@ class CVPixelBufferSupport: NSObject {
                                          options as CFDictionary,
                                          &pixelBuffer)
         if status != kCVReturnSuccess {
-//            return status
             print("err")
         }
-//        CVPixelBufferRef pixelBuffer = *pixelBufferOut;
-        
-        
-        // Create a Color Space
         let colorSpace: CGColorSpace = CGColorSpaceCreateDeviceRGB()
-        
-        // Lock Pixel Buffer
-//        let result = CVPixelBufferLockBaseAddress(pixelBuffer, 0);
-        let result = CVPixelBufferLockBaseAddress(pixelBuffer, .readOnly) // 흠...
+        let result = CVPixelBufferLockBaseAddress(pixelBuffer, .readOnly)
         
         if result != kCVReturnSuccess {
-//            return result;
             print("err")
         }
-        
-//        let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue)
         let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedFirst.rawValue)
-//        kCGImageAlphaPremultipliedFirst
-//
-//        guard let context = CGContext.init(data: nil, width: Int(size.width), height: Int(size.height), bitsPerComponent: Int(bitsPerComponent), bytesPerRow: Int(bytesPerRow), space: colorSpace, bitmapInfo: UInt32(bitmapInfo.rawValue)) else {
-            // cannot create context - handle error
-//        }
-//        CVPixelBufferGetBaseAddress
         let context = CGContext.init(data: CVPixelBufferGetBaseAddress(pixelBuffer),
                                      width: width,
                                      height: height,
@@ -67,26 +46,9 @@ class CVPixelBufferSupport: NSObject {
                                      space: colorSpace,
                                      bitmapInfo: bitmapInfo.rawValue)
         
-//        print("context: \(context)")
-//        CGContextDrawImage(context, CGRect(x: 0, y: 0, width: width, height: height), image)
-        context?.draw(testImg, in: CGRect(x: 0, y: 0, width: width, height: height))
-//        context?.draw(image, in: CGRect(x: 0, y: 0, width: 340, height: 356))
-        
-        
-        //        // Draw on Bitmap Context
-        //        CGContextRef context = CGBitmapContextCreate(CVPixelBufferGetBaseAddress(pixelBuffer), width, height, 8, CVPixelBufferGetBytesPerRow(pixelBuffer), colorSpace, kCGImageAlphaPremultipliedFirst);
-        //        CGContextDrawImage(context, CGRectMake(0, 0, width, height), image);
-        //        CGContextRelease(context);
-        //
-        //        // Release a Color Space
-//        CGColorSpaceRelease(colorSpace);
-        //
-        //        // Unlock Pixel Buffer
-//                result = CVPixelBufferUnlockBaseAddress(pixelBuffer, 0)
+        context?.draw(image, in: CGRect(x: 0, y: 0, width: width, height: height))
         CVPixelBufferUnlockBaseAddress(pixelBuffer, .readOnly)
         if (result != kCVReturnSuccess) {
-            //            CVPixelBufferRelease(pixelBuffer);
-//            return result;
             print("err")
         }
         
