@@ -29,7 +29,7 @@ class ViewController: UIViewController {
         self.testLabel1.text = "hello world"
 //        CVPixelBufferRef pixelBuffer
 //        let buff: CVPixelBuffer = CVPixelBuffer()
-        let test: CVPixelBuffer = CVPixelBufferSupport().pixelBufferCreate(image: UIImage(named: "tomato")!.cgImage!, pixcelBuf: nil)
+        let test: CVPixelBuffer = CVPixelBufferSupport().pixelBufferCreate(image: UIImage(named: "tomato")!.cgImage!)
         print("test: \(test)")
         let test2: CMSampleBuffer = CMSampleBufferSupport().sampleBufferCreateReady(imageBuffer: test)
         print("test2: \(test2)")
@@ -37,30 +37,31 @@ class ViewController: UIViewController {
         myLayer.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
         myLayer.flush()
         myLayer.enqueue(test2)
+//        myLayer.backgroundColor = UIColor.brown.cgColor
 //        testView.setNeedsDisplay()
         
         // test
-        myLayer.flush()
+//        myLayer.flush()
 //        myLayer.backgroundColor = UIColor.red.cgColor
-        let test3: CMSampleBuffer = UIImage(named: "tomato")!.cmSampleBuffer
+//        let test3: CMSampleBuffer = UIImage(named: "tomato")!.cmSampleBuffer
 //        myLayer.enqueue(test3)
-        print("test3: \(test3)")
+//        print("test3: \(test3)")
         
         // test
         
         
-        let testBuff = UIImage(named: "tomato")!.cvPixelBuffer!
-        
-        let imageBuffer = CMSampleBufferGetImageBuffer(test3)!
-        let ciimage = CIImage(cvPixelBuffer: imageBuffer)
-        let context = CIContext(options: nil)
-        let cgImage = context.createCGImage(ciimage, from: ciimage.extent)!
-        let image = UIImage(cgImage: cgImage)
-        
-        self.debugImageView.image = UIImage.init(pixelBuffer: testBuff)
-        self.debugImageView.image = UIImage(named: "tomato")
-        self.debugImageView.image = image
-        self.view.layoutIfNeeded()
+//        let testBuff = UIImage(named: "tomato")!.cvPixelBuffer!
+//
+//        let imageBuffer = CMSampleBufferGetImageBuffer(test3)!
+//        let ciimage = CIImage(cvPixelBuffer: imageBuffer)
+//        let context = CIContext(options: nil)
+//        let cgImage = context.createCGImage(ciimage, from: ciimage.extent)!
+//        let image = UIImage(cgImage: cgImage)
+//
+//        self.debugImageView.image = UIImage.init(pixelBuffer: testBuff)
+//        self.debugImageView.image = UIImage(named: "tomato")
+//        self.debugImageView.image = image
+//        self.view.layoutIfNeeded()
     }
     
     override func viewDidLoad() {
