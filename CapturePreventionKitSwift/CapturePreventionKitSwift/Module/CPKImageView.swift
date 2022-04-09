@@ -17,6 +17,7 @@ class CPKImageView: UIView {
         let layer: AVSampleBufferDisplayLayer = AVSampleBufferDisplayLayer()
         layer.videoGravity = .resizeAspect
         layer.preventsCapture = true
+        layer.speed = 999
         return layer
     }()
     
@@ -39,7 +40,40 @@ class CPKImageView: UIView {
         }
     }
     
-//    var contentMode: UIView.ContentMode = .scaleAspectFit
+    override var contentMode: UIView.ContentMode {
+        didSet {
+            switch self.contentMode {
+            case .scaleToFill:
+                self.imageLayer.videoGravity = .resize
+            case .scaleAspectFit:
+                self.imageLayer.videoGravity = .resizeAspect
+            case .scaleAspectFill:
+                self.imageLayer.videoGravity = .resizeAspectFill
+            case .redraw:
+                self.imageLayer.videoGravity = .resize
+            case .center:
+                self.imageLayer.videoGravity = .resize
+            case .top:
+                self.imageLayer.videoGravity = .resize
+            case .bottom:
+                self.imageLayer.videoGravity = .resize
+            case .left:
+                self.imageLayer.videoGravity = .resize
+            case .right:
+                self.imageLayer.videoGravity = .resize
+            case .topLeft:
+                self.imageLayer.videoGravity = .resize
+            case .topRight:
+                self.imageLayer.videoGravity = .resize
+            case .bottomLeft:
+                self.imageLayer.videoGravity = .resize
+            case .bottomRight:
+                self.imageLayer.videoGravity = .resize
+            @unknown default:
+                self.imageLayer.videoGravity = .resize
+            }
+        }
+    }
     
     // MARK: lifeCycle
     

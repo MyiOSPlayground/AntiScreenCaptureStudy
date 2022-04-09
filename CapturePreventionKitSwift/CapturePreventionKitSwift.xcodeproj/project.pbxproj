@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		783CEFB82801DA0E009708EF /* CPKCoreLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 783CEFB72801DA0E009708EF /* CPKCoreLabel.swift */; };
+		783CEFBA2801DA92009708EF /* CPKLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 783CEFB92801DA92009708EF /* CPKLabel.swift */; };
 		78ACE714280164D200AF30F7 /* CPKImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78ACE713280164D200AF30F7 /* CPKImageView.swift */; };
 		78F57B1827FDBC8200F23921 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F57B1727FDBC8200F23921 /* AppDelegate.swift */; };
 		78F57B1A27FDBC8200F23921 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F57B1927FDBC8200F23921 /* SceneDelegate.swift */; };
@@ -19,6 +21,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		783CEFB72801DA0E009708EF /* CPKCoreLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CPKCoreLabel.swift; sourceTree = "<group>"; };
+		783CEFB92801DA92009708EF /* CPKLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CPKLabel.swift; sourceTree = "<group>"; };
 		78ACE713280164D200AF30F7 /* CPKImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CPKImageView.swift; sourceTree = "<group>"; };
 		78F57B1427FDBC8200F23921 /* CapturePreventionKitSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CapturePreventionKitSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		78F57B1727FDBC8200F23921 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -80,6 +84,8 @@
 				78F57B2C27FDBD4F00F23921 /* CVPixelBufferSupport.swift */,
 				78F57B2E27FDDD6B00F23921 /* CMSampleBufferSupport.swift */,
 				78ACE713280164D200AF30F7 /* CPKImageView.swift */,
+				783CEFB72801DA0E009708EF /* CPKCoreLabel.swift */,
+				783CEFB92801DA92009708EF /* CPKLabel.swift */,
 			);
 			path = Module;
 			sourceTree = "<group>";
@@ -159,8 +165,10 @@
 				78F57B1C27FDBC8200F23921 /* ViewController.swift in Sources */,
 				78F57B1827FDBC8200F23921 /* AppDelegate.swift in Sources */,
 				78F57B1A27FDBC8200F23921 /* SceneDelegate.swift in Sources */,
+				783CEFB82801DA0E009708EF /* CPKCoreLabel.swift in Sources */,
 				78F57B2D27FDBD4F00F23921 /* CVPixelBufferSupport.swift in Sources */,
 				78ACE714280164D200AF30F7 /* CPKImageView.swift in Sources */,
+				783CEFBA2801DA92009708EF /* CPKLabel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

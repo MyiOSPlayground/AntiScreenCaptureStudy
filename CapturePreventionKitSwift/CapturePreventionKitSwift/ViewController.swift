@@ -12,9 +12,9 @@ import AVFoundation
 
 class ViewController: UIViewController {
     
+    @IBOutlet weak var testImgView: UIImageView!
     @IBOutlet weak var testLabel1: UILabel!
     @IBOutlet weak var testView: UIView!
-    @IBOutlet weak var testImgView: UIImageView!
     @IBOutlet weak var customImgView: CPKImageView!
     
     lazy var myLayer: AVSampleBufferDisplayLayer = {
@@ -34,12 +34,8 @@ class ViewController: UIViewController {
         myLayer.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
         myLayer.flush()
         myLayer.enqueue(test2!)
-        
-        
-        self.testImgView.image = UIImage(named: "tomato")
         self.testImgView.contentMode = .scaleToFill
-        self.customImgView.contentMode = .scaleAspectFill
-//        self.customImgView.layoutIfNeeded()
+        self.customImgView.contentMode = .scaleAspectFit
     }
     
     override func viewDidLoad() {
