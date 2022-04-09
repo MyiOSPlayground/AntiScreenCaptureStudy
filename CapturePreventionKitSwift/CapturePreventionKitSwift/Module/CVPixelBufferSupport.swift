@@ -5,54 +5,56 @@
 //  Created by hanwe on 2022/04/06.
 //
 
-import UIKit
 import CoreVideo
 import CoreGraphics
 
 class CVPixelBufferSupport: NSObject {
     
-    func pixelBufferCreate(image: CGImage) -> CVPixelBuffer {
+    static func pixelBufferCreate(image: CGImage) -> CVPixelBuffer? {
         
         let width = image.width
         let height = image.height
         
-        var pixelBuffer: CVPixelBuffer!
+        var pixelBufferPtr: CVPixelBuffer?
         let options: [CFString: Any] = [
             kCVPixelBufferCGImageCompatibilityKey: true,
             kCVPixelBufferCGBitmapContextCompatibilityKey: true,
             kCVPixelBufferIOSurfacePropertiesKey: [:]
             ]
-        let status = CVPixelBufferCreate(kCFAllocatorDefault,
+        
+        var status = CVPixelBufferCreate(kCFAllocatorDefault,
                                          Int(width),
                                          Int(height),
                                          kCVPixelFormatType_32ARGB,
                                          options as CFDictionary,
-                                         &pixelBuffer)
+                                         &pixelBufferPtr)
         if status != kCVReturnSuccess {
-            print("err")
+            print("capturePrevention Error: \(status)")
+            return nil
         }
-        let colorSpace: CGColorSpace = CGColorSpaceCreateDeviceRGB()
-        let result = CVPixelBufferLockBaseAddress(pixelBuffer, .readOnly)
+        guard let pixelBuffer = pixelBufferPtr else { return nil }
+
+        status = CVPixelBufferLockBaseAddress(pixelBuffer, .readOnly)
+        if status != kCVReturnSuccess {
+            print("capturePrevention Error: \(status)")
+            return nil
+        }
         
-        if result != kCVReturnSuccess {
-            print("err")
-        }
-        let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedFirst.rawValue)
         let context = CGContext.init(data: CVPixelBufferGetBaseAddress(pixelBuffer),
                                      width: width,
                                      height: height,
                                      bitsPerComponent: 8,
                                      bytesPerRow: CVPixelBufferGetBytesPerRow(pixelBuffer),
-                                     space: colorSpace,
-                                     bitmapInfo: bitmapInfo.rawValue)
-        
+                                     space: CGColorSpaceCreateDeviceRGB(),
+                                     bitmapInfo: CGImageAlphaInfo.premultipliedFirst.rawValue)
         context?.draw(image, in: CGRect(x: 0, y: 0, width: width, height: height))
-        CVPixelBufferUnlockBaseAddress(pixelBuffer, .readOnly)
-        if (result != kCVReturnSuccess) {
-            print("err")
+        
+        status = CVPixelBufferUnlockBaseAddress(pixelBuffer, .readOnly)
+        if status != kCVReturnSuccess {
+            print("capturePrevention Error: \(status)")
+            return nil
         }
         
-        print("pixelBufferCreate end")
         return pixelBuffer
     }
 
