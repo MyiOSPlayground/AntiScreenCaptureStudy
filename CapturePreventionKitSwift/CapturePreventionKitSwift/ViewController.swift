@@ -16,6 +16,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var testLabel1: UILabel!
     @IBOutlet weak var testView: UIView!
     @IBOutlet weak var customImgView: CPKImageView!
+    @IBOutlet weak var customLabel: CPKLabel!
     
     lazy var myLayer: AVSampleBufferDisplayLayer = {
         let layer: AVSampleBufferDisplayLayer = AVSampleBufferDisplayLayer()
@@ -46,6 +47,10 @@ class ViewController: UIViewController {
     
     @IBAction func testAction(_ sender: Any) {
         self.customImgView.image = UIImage(named: "carrot")
+    }
+    @IBAction func customLabelTest(_ sender: Any) {
+        print("customLabelTest")
+        self.customLabel.text = self.customLabel.text + "1"
     }
     
 }

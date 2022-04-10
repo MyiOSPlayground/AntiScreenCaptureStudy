@@ -53,17 +53,37 @@
                                     <action selector="testAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="JLY-fL-z0g"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tbe-bS-igk" customClass="CPKLabel" customModule="CapturePreventionKitSwift" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="500" width="414" height="60"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="jGr-wB-SGV"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ft9-Fz-msF">
+                                <rect key="frame" x="173.5" y="565" width="67" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                <connections>
+                                    <action selector="customLabelTest:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9Zo-Z2-ED3"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="Ft9-Fz-msF" firstAttribute="top" secondItem="tbe-bS-igk" secondAttribute="bottom" constant="5" id="6hL-5e-9Y6"/>
                             <constraint firstItem="lDq-bM-adY" firstAttribute="centerX" secondItem="FsN-hi-3sf" secondAttribute="centerX" id="8wr-sc-Lfz"/>
                             <constraint firstItem="lDq-bM-adY" firstAttribute="top" secondItem="YC3-El-mkv" secondAttribute="bottom" constant="10" id="96W-Ks-Adw"/>
                             <constraint firstItem="eoJ-f9-gZp" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="GZ0-OX-r5N"/>
                             <constraint firstItem="FsN-hi-3sf" firstAttribute="centerY" secondItem="uOp-W7-SrS" secondAttribute="centerY" id="JIX-9j-Zwv"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="YC3-El-mkv" secondAttribute="trailing" id="QlT-A4-xBX"/>
+                            <constraint firstItem="Ft9-Fz-msF" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="TW1-wj-z77"/>
                             <constraint firstItem="YC3-El-mkv" firstAttribute="top" secondItem="uOp-W7-SrS" secondAttribute="bottom" constant="20" id="WRJ-SA-Hip"/>
                             <constraint firstItem="uOp-W7-SrS" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Z3P-v9-ulU"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="tbe-bS-igk" secondAttribute="trailing" id="aQ4-xu-bLq"/>
+                            <constraint firstItem="tbe-bS-igk" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="b96-u0-uC6"/>
+                            <constraint firstItem="tbe-bS-igk" firstAttribute="top" secondItem="eoJ-f9-gZp" secondAttribute="bottom" constant="5" id="iWX-Ax-maR"/>
                             <constraint firstItem="eoJ-f9-gZp" firstAttribute="top" secondItem="YC3-El-mkv" secondAttribute="bottom" constant="10" id="iiP-Iy-KsA"/>
                             <constraint firstItem="uOp-W7-SrS" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="100" id="kka-Sg-cnN"/>
                             <constraint firstItem="YC3-El-mkv" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="qLd-Gg-HLR"/>
@@ -72,6 +92,7 @@
                     </view>
                     <connections>
                         <outlet property="customImgView" destination="FsN-hi-3sf" id="983-bz-Q7g"/>
+                        <outlet property="customLabel" destination="tbe-bS-igk" id="i7n-MU-Z4N"/>
                         <outlet property="testImgView" destination="uOp-W7-SrS" id="yuB-c0-BO2"/>
                         <outlet property="testLabel1" destination="YC3-El-mkv" id="XyF-Vp-W4F"/>
                         <outlet property="testView" destination="eoJ-f9-gZp" id="7kE-rH-HQB"/>
