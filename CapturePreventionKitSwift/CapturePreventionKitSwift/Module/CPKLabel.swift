@@ -13,43 +13,28 @@ class CPKLabel: UIView, CPKCoreLabelDelegate {
     
     // MARK: private property
     
-//    private lazy var labelLayer: AVSampleBufferDisplayLayer = {
-//        let layer: AVSampleBufferDisplayLayer = AVSampleBufferDisplayLayer()
-//        layer.videoGravity = .resizeAspect
-//        layer.preventsCapture = true
-//        layer.speed = 999
-//        return layer
-//    }()
+    private lazy var labelLayer: AVSampleBufferDisplayLayer = {
+        let layer: AVSampleBufferDisplayLayer = AVSampleBufferDisplayLayer()
+        layer.videoGravity = .resizeAspect
+        layer.preventsCapture = true
+        layer.speed = 999
+        return layer
+    }()
     
     private let queueName: String = "CPKLabelViewQueue"
     
-    private let coreLabel: CPKCoreLabel = {
+    private lazy var coreLabel: CPKCoreLabel = {
         let label: CPKCoreLabel = CPKCoreLabel()
-        label.textColor = .black
-        label.backgroundColor = .lightGray
-        label.numberOfLines = 1
-        label.textAlignment = .left
-        label.font = .systemFont(ofSize: 20)
+        label.textColor = self.textColor
+        label.backgroundColor = self.backgroundColor
+        label.numberOfLines = Int(self.numberOfLines)
+        label.textAlignment = self.textAlignment
+        label.font = self.font
         label.sizeToFit()
         return label
     }()
     
     // MARK: internal property
-    
-//    var image: UIImage? {
-//        didSet {
-//            guard let img = self.image else { return }
-//            let queue = DispatchQueue(label: self.queueName)
-//            queue.async { [weak self] in
-//                if let video = self?.makeVideoImage(img) {
-//                    DispatchQueue.main.async { [weak self] in
-//                        self?.labelLayer.flush()
-//                        self?.labelLayer.enqueue(video)
-//                    }
-//                }
-//            }
-//        }
-//    }
     
     var text: String = "" {
         didSet {
@@ -57,6 +42,36 @@ class CPKLabel: UIView, CPKCoreLabelDelegate {
                 self?.calcFrame()
                 self?.coreLabel.text = self?.text ?? ""
             }
+        }
+    }
+    
+    var textColor: UIColor = .black {
+        didSet {
+            self.coreLabel.textColor = self.textColor
+        }
+    }
+    
+    var font: UIFont = .systemFont(ofSize: 20) {
+        didSet {
+            self.coreLabel.font = self.font
+        }
+    }
+    
+    var textAlignment: NSTextAlignment = .left {
+        didSet {
+            self.coreLabel.textAlignment = self.textAlignment
+        }
+    }
+    
+    var numberOfLines: UInt = 1 {
+        didSet {
+            self.coreLabel.numberOfLines = Int(self.numberOfLines)
+        }
+    }
+    
+    var attributedText: NSAttributedString? {
+        didSet {
+            self.coreLabel.attributedText = self.attributedText
         }
     }
     
@@ -79,8 +94,8 @@ class CPKLabel: UIView, CPKCoreLabelDelegate {
     // MARK: private function
     
     private func setup() {
-//        self.layer.addSublayer(self.labelLayer)
-//        self.labelLayer.frame = CGRect(x: 0, y: 0, width: self.bounds.width, height: self.bounds.height)
+        self.layer.addSublayer(self.labelLayer)
+        self.labelLayer.frame = self.coreLabel.frame
         self.coreLabel.delegate = self
         self.addSubview(self.coreLabel)
     }
@@ -99,11 +114,26 @@ class CPKLabel: UIView, CPKCoreLabelDelegate {
         let height: CGFloat = textRect.height
         let frame = CGRect(x: x, y: y, width: width, height: height)
         self.coreLabel.frame = frame
+        self.labelLayer.frame = self.coreLabel.frame
+    }
+    
+    private func updateTest() {
+        self.coreLabel.isHidden = false
+        let imageRender = UIGraphicsImageRenderer(bounds: self.coreLabel.frame)
+        let image = imageRender.image { context in
+            self.coreLabel.layer.render(in: context.cgContext)
+        }
+        guard let video = makeVideoImage(image) else { return }
+        self.coreLabel.isHidden = true
+        DispatchQueue.main.async { [weak self] in
+            self?.labelLayer.flush()
+            self?.labelLayer.enqueue(video)
+        }
     }
     
     // MARK: internal function
     
     func drawCPKCoreLabel(_ rect: CGRect) {
-        print("test: \(self.coreLabel.text)")
+        updateTest()
     }
 }
